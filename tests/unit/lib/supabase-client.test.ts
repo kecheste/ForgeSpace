@@ -55,7 +55,14 @@ describe('Supabase Client', () => {
       expect.anything()
     );
 
-    // Test mock client structure
+    // expect(client).toEqual({
+    //   from: vi.fn(() => ({
+    //     select: vi.fn().mockReturnValue({ data: null, error: null }),
+    //     insert: vi.fn().mockReturnValue({ data: null, error: null }),
+    //     update: vi.fn().mockReturnValue({ data: null, error: null }),
+    //     delete: vi.fn().mockReturnValue({ error: null }),
+    //   })),
+    // });
     const table = client.from('test_table');
     expect(table).toBeDefined();
     expect(typeof table.select).toBe('function');
