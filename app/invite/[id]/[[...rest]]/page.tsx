@@ -1,8 +1,8 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
-import { useUser, SignIn, SignUp } from '@clerk/nextjs';
-import { useEffect, useState } from 'react';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -10,24 +10,25 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import {
-  Building2,
-  Users,
-  CheckCircle,
-  XCircle,
-  Clock,
-  Mail,
-  LogIn,
-  UserPlus,
-  ArrowRight,
-} from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { workspacesAPI } from '@/lib/api/workspaces';
 import { usersAPI } from '@/lib/api/users';
+import { workspacesAPI } from '@/lib/api/workspaces';
+import { SignIn, SignUp, useUser } from '@clerk/nextjs';
+import {
+  ArrowRight,
+  Building2,
+  CheckCircle,
+  ChevronLeftIcon,
+  Clock,
+  LogIn,
+  Mail,
+  UserPlus,
+  Users,
+  XCircle,
+} from 'lucide-react';
 import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface Invitation {
   id: string;
@@ -216,9 +217,10 @@ export default function InvitationPage() {
             <Button
               variant="ghost"
               onClick={() => setShowAuth(false)}
-              className="absolute left-4 top-4"
+              className="absolute left-4 top-4 hover:bg-transparent cursor-pointer hover:text-gray-500 transition-all duration-300"
             >
-              ← Back to Invitation
+              <ChevronLeftIcon width={5} height={5} className="mb-0.5" />
+              Back to Invitation
             </Button>
             <CardTitle className="text-2xl">
               {authMode === 'signin' ? 'Sign In' : 'Create Account'}
@@ -232,7 +234,7 @@ export default function InvitationPage() {
           <CardContent>
             {authMode === 'signin' ? (
               <SignIn
-                redirectUrl={`/invite/${invitationId}`}
+                forceRedirectUrl={`/invite/${invitationId}`}
                 appearance={{
                   elements: {
                     formButtonPrimary: 'bg-primary hover:bg-primary/90',
@@ -241,7 +243,7 @@ export default function InvitationPage() {
               />
             ) : (
               <SignUp
-                redirectUrl={`/invite/${invitationId}`}
+                forceRedirectUrl={`/invite/${invitationId}`}
                 appearance={{
                   elements: {
                     formButtonPrimary: 'bg-primary hover:bg-primary/90',
@@ -350,7 +352,7 @@ export default function InvitationPage() {
                   <Button
                     onClick={handleAcceptInvitation}
                     disabled={accepting}
-                    className="w-full"
+                    className="w-full cursor-pointer"
                   >
                     {accepting ? 'Accepting...' : 'Accept Invitation'}
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -358,7 +360,7 @@ export default function InvitationPage() {
                   <Button
                     variant="outline"
                     onClick={handleDeclineInvitation}
-                    className="w-full"
+                    className="w-full text-red-600 hover:bg-red-50 hover:text-red-500 border-red-100 cursor-pointer"
                   >
                     Decline
                   </Button>

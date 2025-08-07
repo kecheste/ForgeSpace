@@ -221,12 +221,28 @@ export default function IdeaAnalyzer() {
                   onChange={(e) => setCurrentPhase(e.target.value)}
                   className="w-full p-2 border rounded-md"
                 >
-                  <option value="inception">Inception - Just an idea</option>
-                  <option value="refinement">
+                  <option
+                    className="bg-gray-100 text-gray-700"
+                    value="inception"
+                  >
+                    Inception - Just an idea
+                  </option>
+                  <option
+                    className="bg-gray-100 text-gray-700"
+                    value="refinement"
+                  >
                     Refinement - Validating concept
                   </option>
-                  <option value="planning">Planning - Detailed planning</option>
-                  <option value="execution_ready">
+                  <option
+                    className="bg-gray-200 text1gray-700"
+                    value="planning"
+                  >
+                    Planning - Detailed planning
+                  </option>
+                  <option
+                    className="bg-gray-200 text1gray-700"
+                    value="execution_ready"
+                  >
                     Execution Ready - Ready to build
                   </option>
                 </select>

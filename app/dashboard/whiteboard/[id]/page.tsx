@@ -47,7 +47,6 @@ import {
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { whiteboardsAPI } from '@/lib/api/whiteboards';
 import { useUser } from '@clerk/nextjs';
@@ -419,10 +418,10 @@ export default function WhiteboardCanvasPage() {
         <div className="flex-1">
           <div className="flex items-center gap-3">
             {isEditing ? (
-              <Input
+              <input
                 value={canvasName}
                 onChange={(e) => setCanvasName(e.target.value)}
-                className="text-xl font-semibold"
+                className="text-xl font-semibold *:placeholder:text-muted-foreground p-0 pl-2 border-1 border-gray-400 rounded-sm focus:border-blue-500 focus:ring-0 transition-all duration-300"
               />
             ) : (
               <h1 className="text-xl font-semibold">{canvas.name}</h1>
@@ -432,10 +431,10 @@ export default function WhiteboardCanvasPage() {
             </Badge>
           </div>
           {isEditing ? (
-            <Textarea
+            <input
               value={canvasDescription}
               onChange={(e) => setCanvasDescription(e.target.value)}
-              className="text-sm text-muted-foreground mt-1"
+              className="text-sm text-muted-foreground mt-1 p-0 pl-2 border-1 border-gray-300 rounded-xs focus:border-blue-400 transition-all duration-300 w-1/2"
               placeholder="Canvas description..."
             />
           ) : (

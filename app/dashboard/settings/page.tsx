@@ -1,5 +1,8 @@
 'use client';
 
+import PremiumPlans from '@/components/premium-plans';
+import { useUserProfile } from '@/components/providers/user-profile-provider';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -10,32 +13,30 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { PageSkeleton } from '@/components/ui/loading-skeleton';
+import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Separator } from '@/components/ui/separator';
-import {
-  User,
-  Bell,
-  Shield,
-  Key,
-  Smartphone,
-  Globe,
-  Lock,
-  Save,
-  Loader2,
-  CheckCircle,
-} from 'lucide-react';
-import { useUser } from '@clerk/nextjs';
-import { useState, useEffect } from 'react';
-import { usersAPI } from '@/lib/api/users';
+import { useToast } from '@/hooks/use-toast';
 import {
   notificationsAPI,
   type NotificationPreferences,
 } from '@/lib/api/notifications';
-import { useToast } from '@/hooks/use-toast';
-import { PageSkeleton } from '@/components/ui/loading-skeleton';
-import { useUserProfile } from '@/components/providers/user-profile-provider';
+import { usersAPI } from '@/lib/api/users';
+import { useUser } from '@clerk/nextjs';
+import {
+  Bell,
+  CheckCircle,
+  Globe,
+  Key,
+  Loader2,
+  Lock,
+  Save,
+  Shield,
+  Smartphone,
+  User,
+} from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 interface ProfileFormData {
   first_name: string;
@@ -67,6 +68,7 @@ export default function SettingsPage() {
     analytics_tracking: true,
     data_collection: true,
   });
+  const [upgradePlanOpen, setUpgradePlanOpen] = useState(false);
 
   useEffect(() => {
     if (userProfile) {
@@ -208,6 +210,12 @@ export default function SettingsPage() {
       </header>
 
       <div className="flex-1 overflow-auto p-6">
+        {upgradePlanOpen && (
+          <PremiumPlans
+            open={upgradePlanOpen}
+            onOpenChange={() => setUpgradePlanOpen(!upgradePlanOpen)}
+          />
+        )}
         <div className="w-full space-y-6">
           <Tabs defaultValue="profile" className="space-y-4">
             <TabsList className="grid w-full grid-cols-6">
@@ -714,7 +722,9 @@ export default function SettingsPage() {
                         Free Plan - Basic features
                       </p>
                     </div>
-                    <Button>Upgrade Plan</Button>
+                    <Button onClick={() => setUpgradePlanOpen(true)}>
+                      Upgrade Plan
+                    </Button>
                   </div>
 
                   <Separator />

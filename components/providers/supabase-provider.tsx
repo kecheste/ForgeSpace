@@ -18,11 +18,11 @@ const SupabaseContext = createContext<SupabaseContextType | undefined>(
 export function SupabaseProvider({ children }: { children: React.ReactNode }) {
   const { user } = useUser();
   const [isConnected, setIsConnected] = useState(false);
-  const [supabase] = useState(() => createClient());
+  // const [supabase] = useState(() => createClient());
+  const supabase = createClient();
 
   useEffect(() => {
     if (user && supabase) {
-      // Set up real-time connection
       const channel = supabase.channel('user-presence');
 
       type ChannelStatus = 'SUBSCRIBED' | 'CLOSED' | string;

@@ -1,7 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
-  // AI Analyzer API
   http.post('/api/analyze-idea', async ({ request }) => {
     const body = await request.json();
 
@@ -51,10 +50,7 @@ export const handlers = [
     });
   }),
 
-  // Phase Suggestions API
-  http.post('/api/phase-suggestions', async ({ request }) => {
-    const body = await request.json();
-
+  http.post('/api/phase-suggestions', async () => {
     return HttpResponse.json({
       suggestions: [
         'Consider defining the target audience more specifically',
@@ -64,7 +60,6 @@ export const handlers = [
     });
   }),
 
-  // Test AI API
   http.post('/api/test-ai', async () => {
     return HttpResponse.json({
       success: true,
@@ -72,7 +67,6 @@ export const handlers = [
     });
   }),
 
-  // Whiteboards API
   http.get('/api/whiteboards', () => {
     return HttpResponse.json({
       data: [
@@ -98,10 +92,8 @@ export const handlers = [
     return HttpResponse.json({
       data: {
         id: '2',
-        title: isValidBody ? (body as Record<string, any>).title : '',
-        description: isValidBody
-          ? (body as Record<string, any>).description
-          : '',
+        title: isValidBody ? body.title : '',
+        description: isValidBody ? body.description : '',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       },
@@ -120,7 +112,6 @@ export const handlers = [
     });
   }),
 
-  // Workspaces API
   http.get('/api/workspaces', () => {
     return HttpResponse.json({
       data: [
@@ -146,10 +137,8 @@ export const handlers = [
     return HttpResponse.json({
       data: {
         id: '2',
-        name: isValidBody ? (body as Record<string, any>).name : '',
-        description: isValidBody
-          ? (body as Record<string, any>).description
-          : '',
+        name: isValidBody ? body.name : '',
+        description: isValidBody ? body.description : '',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       },
@@ -157,9 +146,7 @@ export const handlers = [
   }),
 
   // Workspace Invitations API
-  http.post('/api/workspaces/invite', async ({ request }) => {
-    const body = await request.json();
-
+  http.post('/api/workspaces/invite', async () => {
     return HttpResponse.json({
       success: true,
       message: 'Invitation sent successfully',
@@ -167,9 +154,7 @@ export const handlers = [
   }),
 
   // Notifications API
-  http.post('/api/notifications/process', async ({ request }) => {
-    const body = await request.json();
-
+  http.post('/api/notifications/process', async () => {
     return HttpResponse.json({
       success: true,
       message: 'Notification processed successfully',
@@ -196,7 +181,7 @@ export const handlers = [
 
   http.post('/api/ideas', async ({ request }) => {
     const body = await request.json();
-    const data = body as Record<string, any>;
+    const data = body as Record<string, string>;
 
     return HttpResponse.json({
       data: {

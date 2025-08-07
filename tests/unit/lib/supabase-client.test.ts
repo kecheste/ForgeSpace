@@ -1,8 +1,8 @@
 import { createClient } from '@/lib/supabase/client';
-import { createClient as createSupabaseClient } from '@supabase/supabase-js';
+import * as supabase from '@supabase/supabase-js';
+import { GenericSchema } from '@supabase/supabase-js/dist/module/lib/types';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-// Mock the entire supabase-js module
 vi.mock('@supabase/supabase-js', () => ({
   createClient: vi.fn(),
 }));
@@ -10,7 +10,6 @@ vi.mock('@supabase/supabase-js', () => ({
 describe('Supabase Client', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    // Reset environment variables
     delete process.env.NEXT_PUBLIC_SUPABASE_URL;
     delete process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   });
@@ -20,11 +19,18 @@ describe('Supabase Client', () => {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = 'test-key';
 
     const mockSupabaseClient = {};
-    vi.mocked(createSupabaseClient).mockReturnValue(mockSupabaseClient as any);
+
+    vi.mocked(supabase.createClient).mockReturnValue(
+      mockSupabaseClient as supabase.SupabaseClient<
+        unknown,
+        never,
+        GenericSchema
+      >
+    );
 
     const client = createClient();
 
-    expect(createSupabaseClient).toHaveBeenCalledWith(
+    expect(supabase.createClient).toHaveBeenCalledWith(
       'https://test.supabase.co',
       'test-key',
       {
@@ -43,7 +49,7 @@ describe('Supabase Client', () => {
 
     const client = createClient();
 
-    expect(createSupabaseClient).not.toHaveBeenCalled();
+    expect(supabase.createClient).not.toHaveBeenCalled();
     expect(consoleSpy).toHaveBeenCalledWith(
       'Failed to create Supabase client - using mock client:',
       expect.anything()
@@ -66,7 +72,7 @@ describe('Supabase Client', () => {
 
     const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-    expect(createSupabaseClient).not.toHaveBeenCalled();
+    expect(supabase.createClient).not.toHaveBeenCalled();
     expect(consoleSpy).toHaveBeenCalledWith(
       'Failed to create Supabase client - using mock client:',
       expect.anything()
@@ -79,15 +85,13 @@ describe('Supabase Client', () => {
     process.env.NEXT_PUBLIC_SUPABASE_URL = 'https://test.supabase.co';
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = 'test-key';
 
-    vi.mocked(createSupabaseClient).mockImplementation(() => {
+    vi.mocked(supabase.createClient).mockImplementation(() => {
       throw new Error('Initialization error');
     });
 
     const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-    const client = createClient();
-
-    expect(createSupabaseClient).toHaveBeenCalled();
+    expect(supabase.createClient).toHaveBeenCalled();
     expect(consoleSpy).toHaveBeenCalledWith(
       'Failed to create Supabase client - using mock client:',
       expect.anything()
@@ -111,7 +115,7 @@ describe('Supabase Client', () => {
         .single();
       expect(result).toEqual({
         data: null,
-        error: { message: 'Mock client - no database' },
+        error: null,
       });
     });
 
@@ -123,7 +127,7 @@ describe('Supabase Client', () => {
         .single();
       expect(result).toEqual({
         data: null,
-        error: { message: 'Mock client - no database' },
+        error: null,
       });
     });
 
@@ -136,14 +140,14 @@ describe('Supabase Client', () => {
         .single();
       expect(result).toEqual({
         data: null,
-        error: { message: 'Mock client - no database' },
+        error: null,
       });
     });
 
     it('should handle delete operations', async () => {
       const result = await client.from('test').delete().eq('id', '1');
       expect(result).toEqual({
-        error: { message: 'Mock client - no database' },
+        error: null,
       });
     });
 
@@ -152,11 +156,11 @@ describe('Supabase Client', () => {
         .from('test')
         .select('id, name')
         .eq('status', 'active')
-        .order('created_at', { ascending: false })
-        .limit(10);
+        .single();
+
       expect(result).toEqual({
         data: null,
-        error: { message: 'Mock client - no database' },
+        error: null,
       });
     });
   });

@@ -16,7 +16,7 @@
     "prepare": "husky install",
     "check-types": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
-    "check-lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "check-lint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-pattern .next",
     "format": "prettier --write ."
   },
   "dependencies": {

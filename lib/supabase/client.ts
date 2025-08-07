@@ -2,7 +2,7 @@ import {
   createClient as createSupabaseClient,
   SupabaseClient,
 } from '@supabase/supabase-js';
-import type { Database } from './types';
+import { Database } from './types';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -34,6 +34,8 @@ const createMockClient = () => {
     from: () => ({
       select: () => ({
         eq: () => ({
+          data: null,
+          error: null,
           single: () =>
             Promise.resolve({
               data: null,
