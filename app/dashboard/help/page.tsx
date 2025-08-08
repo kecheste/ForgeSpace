@@ -1,5 +1,6 @@
 'use client';
 
+import { SEOHead } from '@/components/seo-head';
 import {
   Accordion,
   AccordionContent,
@@ -93,225 +94,242 @@ const resources = [
 
 export default function HelpPage() {
   return (
-    <div className="flex h-screen flex-col">
-      <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/95 px-6 backdrop-blur">
-        <div className="flex-1">
-          <h1 className="text-lg font-medium">Help Center</h1>
-        </div>
-        <Button asChild size="sm">
-          <Link href="/help/contact">
-            <MessageCircle className="mr-2 h-4 w-4" />
-            Contact
-          </Link>
-        </Button>
-      </header>
-
-      <main className="flex-1 overflow-auto p-4 md:p-6">
-        <div className="space-y-6">
-          {/* Search */}
-          <Card>
-            <CardContent className="p-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  placeholder="Search help articles..."
-                  className="pl-10"
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Quick Links */}
-          <div>
-            <h2 className="mb-4 text-lg font-medium">Quick Links</h2>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <Card className="hover:border-primary transition-colors">
-                <Link href="/ideas/new">
-                  <CardHeader className="pb-3">
-                    <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                        <Lightbulb className="h-5 w-5 text-blue-500" />
-                      </div>
-                      <div>
-                        <CardTitle className="text-base">Create Idea</CardTitle>
-                        <p className="text-sm text-muted-foreground">
-                          Start a new idea
-                        </p>
-                      </div>
-                    </div>
-                  </CardHeader>
-                </Link>
-              </Card>
-
-              <Card className="hover:border-primary transition-colors">
-                <Link href="/workspaces/new">
-                  <CardHeader className="pb-3">
-                    <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-lg bg-green-500/10 flex items-center justify-center">
-                        <Users className="h-5 w-5 text-green-500" />
-                      </div>
-                      <div>
-                        <CardTitle className="text-base">
-                          Create Workspace
-                        </CardTitle>
-                        <p className="text-sm text-muted-foreground">
-                          Set up team collaboration
-                        </p>
-                      </div>
-                    </div>
-                  </CardHeader>
-                </Link>
-              </Card>
-
-              <Card className="hover:border-primary transition-colors">
-                <Link href="/analyzer">
-                  <CardHeader className="pb-3">
-                    <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-lg bg-purple-500/10 flex items-center justify-center">
-                        <BarChart3 className="h-5 w-5 text-purple-500" />
-                      </div>
-                      <div>
-                        <CardTitle className="text-base">
-                          Analyze Idea
-                        </CardTitle>
-                        <p className="text-sm text-muted-foreground">
-                          Get AI-powered insights
-                        </p>
-                      </div>
-                    </div>
-                  </CardHeader>
-                </Link>
-              </Card>
-            </div>
+    <>
+      <SEOHead
+        title="Help Center"
+        description="Get help with ForgeSpace. Find tutorials, FAQs, and resources to make the most of our AI-powered idea development platform."
+        keywords={[
+          'help',
+          'support',
+          'tutorials',
+          'FAQ',
+          'documentation',
+          'user guide',
+        ]}
+        canonical="https://forge-space.vercel.app/dashboard/help"
+      />
+      <div className="flex h-screen flex-col">
+        <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/95 px-6 backdrop-blur">
+          <div className="flex-1">
+            <h1 className="text-lg font-medium">Help Center</h1>
           </div>
+          <Button asChild size="sm">
+            <Link href="/help/contact">
+              <MessageCircle className="mr-2 h-4 w-4" />
+              Contact
+            </Link>
+          </Button>
+        </header>
 
-          {/* Main Content */}
-          <Tabs defaultValue="tutorials">
-            <TabsList className="w-full">
-              <TabsTrigger value="tutorials">Tutorials</TabsTrigger>
-              <TabsTrigger value="faq">FAQ</TabsTrigger>
-              <TabsTrigger value="resources">Resources</TabsTrigger>
-            </TabsList>
+        <main className="flex-1 overflow-auto p-4 md:p-6">
+          <div className="space-y-6">
+            {/* Search */}
+            <Card>
+              <CardContent className="p-4">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    placeholder="Search help articles..."
+                    className="pl-10"
+                  />
+                </div>
+              </CardContent>
+            </Card>
 
-            <div className="pt-4">
-              <TabsContent value="tutorials" className="space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {tutorials.map((tutorial) => (
-                    <Card
-                      key={tutorial.title}
-                      className="hover:border-primary transition-colors"
-                    >
-                      <CardHeader>
-                        <div className="flex items-center justify-between">
+            {/* Quick Links */}
+            <div>
+              <h2 className="mb-4 text-lg font-medium">Quick Links</h2>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <Card className="hover:border-primary transition-colors">
+                  <Link href="/ideas/new">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                          <Lightbulb className="h-5 w-5 text-blue-500" />
+                        </div>
+                        <div>
                           <CardTitle className="text-base">
-                            {tutorial.title}
+                            Create Idea
                           </CardTitle>
-                          <Badge variant="outline">{tutorial.category}</Badge>
+                          <p className="text-sm text-muted-foreground">
+                            Start a new idea
+                          </p>
                         </div>
-                        <p className="text-sm text-muted-foreground">
-                          {tutorial.description}
-                        </p>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Play className="h-4 w-4" />
-                            {tutorial.duration}
-                          </div>
-                          <Button variant="ghost" size="sm" className="group">
-                            Watch{' '}
-                            <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="faq" className="space-y-4">
-                <Card>
-                  <CardContent className="p-6">
-                    <Accordion type="single" collapsible className="w-full">
-                      {faqs.map((faq, index) => (
-                        <AccordionItem key={index} value={`item-${index}`}>
-                          <AccordionTrigger className="text-left">
-                            {faq.question}
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <p className="text-sm text-muted-foreground">
-                              {faq.answer}
-                            </p>
-                          </AccordionContent>
-                        </AccordionItem>
-                      ))}
-                    </Accordion>
-                  </CardContent>
+                      </div>
+                    </CardHeader>
+                  </Link>
                 </Card>
-              </TabsContent>
 
-              <TabsContent value="resources" className="space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {resources.map((resource) => (
-                    <Card
-                      key={resource.title}
-                      className="hover:border-primary transition-colors"
-                    >
-                      <Link href="#">
-                        <CardHeader>
-                          <div className="flex items-center gap-3">
-                            <div className="h-10 w-10 rounded-lg bg-gray-500/10 flex items-center justify-center">
-                              <resource.icon className="h-5 w-5 text-gray-500" />
-                            </div>
-                            <div>
-                              <CardTitle className="text-base">
-                                {resource.title}
-                              </CardTitle>
-                              <p className="text-sm text-muted-foreground">
-                                {resource.description}
-                              </p>
-                            </div>
-                          </div>
-                        </CardHeader>
-                      </Link>
-                    </Card>
-                  ))}
-                </div>
-              </TabsContent>
+                <Card className="hover:border-primary transition-colors">
+                  <Link href="/workspaces/new">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-lg bg-green-500/10 flex items-center justify-center">
+                          <Users className="h-5 w-5 text-green-500" />
+                        </div>
+                        <div>
+                          <CardTitle className="text-base">
+                            Create Workspace
+                          </CardTitle>
+                          <p className="text-sm text-muted-foreground">
+                            Set up team collaboration
+                          </p>
+                        </div>
+                      </div>
+                    </CardHeader>
+                  </Link>
+                </Card>
+
+                <Card className="hover:border-primary transition-colors">
+                  <Link href="/analyzer">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-lg bg-purple-500/10 flex items-center justify-center">
+                          <BarChart3 className="h-5 w-5 text-purple-500" />
+                        </div>
+                        <div>
+                          <CardTitle className="text-base">
+                            Analyze Idea
+                          </CardTitle>
+                          <p className="text-sm text-muted-foreground">
+                            Get AI-powered insights
+                          </p>
+                        </div>
+                      </div>
+                    </CardHeader>
+                  </Link>
+                </Card>
+              </div>
             </div>
-          </Tabs>
 
-          {/* Contact Section */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Need More Help?</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Can't find what you're looking for? Our support team is here
-                    to help.
-                  </p>
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <MessageCircle className="h-4 w-4" />
-                      <span>support@forgespace.com</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Book className="h-4 w-4" />
-                      <span>Documentation</span>
+            {/* Main Content */}
+            <Tabs defaultValue="tutorials">
+              <TabsList className="w-full">
+                <TabsTrigger value="tutorials">Tutorials</TabsTrigger>
+                <TabsTrigger value="faq">FAQ</TabsTrigger>
+                <TabsTrigger value="resources">Resources</TabsTrigger>
+              </TabsList>
+
+              <div className="pt-4">
+                <TabsContent value="tutorials" className="space-y-4">
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {tutorials.map((tutorial) => (
+                      <Card
+                        key={tutorial.title}
+                        className="hover:border-primary transition-colors"
+                      >
+                        <CardHeader>
+                          <div className="flex items-center justify-between">
+                            <CardTitle className="text-base">
+                              {tutorial.title}
+                            </CardTitle>
+                            <Badge variant="outline">{tutorial.category}</Badge>
+                          </div>
+                          <p className="text-sm text-muted-foreground">
+                            {tutorial.description}
+                          </p>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <Play className="h-4 w-4" />
+                              {tutorial.duration}
+                            </div>
+                            <Button variant="ghost" size="sm" className="group">
+                              Watch{' '}
+                              <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="faq" className="space-y-4">
+                  <Card>
+                    <CardContent className="p-6">
+                      <Accordion type="single" collapsible className="w-full">
+                        {faqs.map((faq, index) => (
+                          <AccordionItem key={index} value={`item-${index}`}>
+                            <AccordionTrigger className="text-left">
+                              {faq.question}
+                            </AccordionTrigger>
+                            <AccordionContent>
+                              <p className="text-sm text-muted-foreground">
+                                {faq.answer}
+                              </p>
+                            </AccordionContent>
+                          </AccordionItem>
+                        ))}
+                      </Accordion>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="resources" className="space-y-4">
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {resources.map((resource) => (
+                      <Card
+                        key={resource.title}
+                        className="hover:border-primary transition-colors"
+                      >
+                        <Link href="#">
+                          <CardHeader>
+                            <div className="flex items-center gap-3">
+                              <div className="h-10 w-10 rounded-lg bg-gray-500/10 flex items-center justify-center">
+                                <resource.icon className="h-5 w-5 text-gray-500" />
+                              </div>
+                              <div>
+                                <CardTitle className="text-base">
+                                  {resource.title}
+                                </CardTitle>
+                                <p className="text-sm text-muted-foreground">
+                                  {resource.description}
+                                </p>
+                              </div>
+                            </div>
+                          </CardHeader>
+                        </Link>
+                      </Card>
+                    ))}
+                  </div>
+                </TabsContent>
+              </div>
+            </Tabs>
+
+            {/* Contact Section */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Need More Help?</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Can't find what you're looking for? Our support team is
+                      here to help.
+                    </p>
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-2">
+                        <MessageCircle className="h-4 w-4" />
+                        <span>support@forgespace.com</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Book className="h-4 w-4" />
+                        <span>Documentation</span>
+                      </div>
                     </div>
                   </div>
+                  <Button asChild>
+                    <Link href="/help/contact">Contact Support</Link>
+                  </Button>
                 </div>
-                <Button asChild>
-                  <Link href="/help/contact">Contact Support</Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </main>
-    </div>
+              </CardContent>
+            </Card>
+          </div>
+        </main>
+      </div>
+    </>
   );
 }

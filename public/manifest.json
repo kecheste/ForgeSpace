@@ -1,7 +1,7 @@
 {
-  "name": "ForgeSpace - Startup Development Platform",
+  "name": "ForgeSpace - AI-Powered Idea Development Platform",
   "short_name": "ForgeSpace",
-  "description": "Transform your ideas into execution-ready ventures with AI-powered validation and collaborative workspaces.",
+  "description": "Transform your ideas into reality with AI-powered analysis and collaborative workspaces.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -17,13 +17,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
+      "src": "/forgespace-logo.png",
+      "sizes": "32x32",
+      "type": "image/png"
     },
     {
-      "src": "/apple-touch-icon.png",
+      "src": "/apple-icon",
       "sizes": "180x180",
       "type": "image/png"
     },
@@ -52,6 +51,32 @@
       "sizes": "750x1334",
       "type": "image/png",
       "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "Go to your dashboard",
+      "url": "/dashboard",
+      "icons": [
+        {
+          "src": "/forgespace-logo.png",
+          "sizes": "32x32"
+        }
+      ]
+    },
+    {
+      "name": "New Idea",
+      "short_name": "New Idea",
+      "description": "Create a new idea",
+      "url": "/dashboard/ideas/new",
+      "icons": [
+        {
+          "src": "/forgespace-logo.png",
+          "sizes": "32x32"
+        }
+      ]
     }
   ]
 }

@@ -1,9 +1,14 @@
+import { ErrorBoundary } from '@/components/error-boundary';
+import { Toaster } from '@/components/ui/toaster';
+import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata, Viewport } from 'next';
 import { Manrope, Playfair_Display } from 'next/font/google';
 import '../styles/globals.css';
-import { Toaster } from '@/components/ui/toaster';
-import { ErrorBoundary } from '@/components/error-boundary';
-import { ClerkProvider } from '@clerk/nextjs';
+import {
+  structuredData as appStructuredData,
+  organizationStructuredData,
+  websiteStructuredData,
+} from './structured-data';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -39,30 +44,41 @@ export const metadata: Metadata = {
     'project planning',
     'startup tools',
     'product development',
+    'AI-powered platform',
+    'idea management',
+    'creative collaboration',
+    'innovation tools',
+    'startup development',
+    'business ideas',
+    'entrepreneurship',
+    'innovation management',
+    'product ideation',
+    'market validation',
   ],
-  authors: [{ name: 'ForgeSpace Team', url: 'https://forgespace.com' }],
+  authors: [
+    { name: 'ForgeSpace Team', url: 'https://forge-space.vercel.app/' },
+  ],
   creator: 'ForgeSpace',
   publisher: 'ForgeSpace',
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || 'https://forgespace.com'
-  ),
+  metadataBase: new URL('https://forge-space.vercel.app'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: '/',
+    url: 'https://forge-space.vercel.app',
     title: 'ForgeSpace - AI-Powered Idea Development Platform',
     description:
       'From concept to implementation - develop better ideas faster with AI-powered analysis and collaborative tools.',
     siteName: 'ForgeSpace',
     images: [
       {
-        url: '/og-image.jpg',
+        url: 'https://forge-space.vercel.app/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'ForgeSpace Platform Dashboard',
+        type: 'image/png',
       },
     ],
   },
@@ -71,7 +87,7 @@ export const metadata: Metadata = {
     title: 'ForgeSpace - AI-Powered Idea Development',
     description:
       'The complete platform for developing and validating ideas with AI and team collaboration',
-    images: ['/og-image.jpg'],
+    images: ['https://forge-space.vercel.app/twitter-image'],
     creator: '@forgespace',
     site: '@forgespace',
   },
@@ -91,15 +107,14 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/forgespace-logo.png', sizes: '32x32', type: 'image/png' },
     ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+    apple: [{ url: '/apple-icon', sizes: '180x180' }],
     other: [
       {
         rel: 'mask-icon',
         url: '/safari-pinned-tab.svg',
-        color: '#6366f1',
+        color: '#8B5CF6',
       },
     ],
   },
@@ -107,6 +122,21 @@ export const metadata: Metadata = {
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
     yandex: process.env.YANDEX_VERIFICATION,
+  },
+  category: 'technology',
+  classification: 'business',
+  other: {
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'default',
+    'apple-mobile-web-app-title': 'ForgeSpace',
+    'format-detection': 'telephone=no',
+    'mobile-web-app-capable': 'yes',
+    'msapplication-config': '/browserconfig.xml',
+    'msapplication-TileColor': '#8B5CF6',
+    'msapplication-tap-highlight': 'no',
+    'theme-color': '#8B5CF6',
+    'application-name': 'ForgeSpace',
+    'msapplication-TileImage': '/forgespace-logo.png',
   },
 };
 
@@ -122,45 +152,11 @@ export const viewport: Viewport = {
   colorScheme: 'light dark',
 };
 
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'ForgeSpace',
-  description:
-    'AI-powered platform for idea development and validation with collaborative workspaces',
-  url: 'https://forgespace.com',
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web Browser',
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
-  },
-  featureList: [
-    'AI-powered idea analysis',
-    'Real-time collaboration',
-    'Development roadmaps',
-    'Idea validation scoring',
-    'Team workspaces',
-    'Progress tracking',
-  ],
-  author: {
-    '@type': 'Organization',
-    name: 'ForgeSpace',
-    url: 'https://forgespace.com',
-  },
-  publisher: {
-    '@type': 'Organization',
-    name: 'ForgeSpace',
-    url: 'https://forgespace.com',
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    ratingCount: '250',
-    bestRating: '5',
-  },
-};
+const combinedStructuredData = [
+  appStructuredData,
+  organizationStructuredData,
+  websiteStructuredData,
+];
 
 /**
  * Root layout component that wraps all pages
@@ -181,10 +177,16 @@ export default function RootLayout({
         className={`${manrope.variable} ${playfair.variable}`}
         suppressHydrationWarning
       >
+        <meta
+          name="google-site-verification"
+          content="CD8o5e2tN1I--zxj6lqHoKCqnQIu0nWfRxGxg0xgHWk"
+        />
         <head>
           <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(combinedStructuredData),
+            }}
           />
         </head>
         <body
