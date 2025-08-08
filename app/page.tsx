@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -9,23 +9,23 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import {
-  Sparkles,
-  Brain,
-  Users,
-  Wrench,
-  Target,
-  Star,
-  Play,
-  ArrowUpRight,
-  ChevronRight,
-  Check,
-} from 'lucide-react';
-import Link from 'next/link';
+import { cn } from '@/lib/utils';
 import { useUser } from '@clerk/nextjs';
 import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import {
+  ArrowUpRight,
+  Brain,
+  Check,
+  ChevronRight,
+  Play,
+  Sparkles,
+  Star,
+  Target,
+  Users,
+  Wrench,
+} from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const features = [
   {
@@ -90,8 +90,8 @@ const testimonials = [
 ];
 
 const stats = [
-  { value: '10,000+', label: 'Ideas Developed' },
-  { value: '500+', label: 'Active Teams' },
+  { value: '1,000+', label: 'Ideas Developed' },
+  { value: '50+', label: 'Active Teams' },
   { value: '95%', label: 'Success Rate' },
 ];
 
@@ -109,7 +109,7 @@ const pricing = [
   },
   {
     name: 'Pro',
-    price: '$29',
+    price: '$19',
     period: '/month',
     description: 'For teams and serious creators',
     features: [
@@ -154,8 +154,13 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center">
-                <Sparkles className="h-4 w-4 text-white" />
+              <div className="h-8 w-8 rounded-lg flex items-center justify-center">
+                <Image
+                  src="/forgespace-logo.png"
+                  alt="ForgeSpace Logo"
+                  width={32}
+                  height={32}
+                />
               </div>
               <span className="font-semibold text-lg bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                 ForgeSpace
@@ -240,10 +245,17 @@ export default function LandingPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-16 rounded-2xl bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900 border shadow-xl overflow-hidden mx-auto max-w-4xl"
           >
-            <div className="aspect-video bg-grid flex items-center justify-center p-8">
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 p-8 mb-6">
-                  <Sparkles className="h-12 w-12 text-white" />
+            <div className="aspect-video bg-grid flex items-center justify-center p-8 bg-[url('/screenshot.png')] bg-no-repeat bg-cover relative">
+              <div className="absolute inset-0 bg-zinc-400/30"></div>
+              <div className="relative z-10 text-center">
+                <div className="inline-flex items-center justify-center bg-gradient-to-l from-pink-200 to-blue-300 rounded-lg p-8 mb-6">
+                  <Image
+                    src="/forgespace-logo.png"
+                    alt="ForgeSpace Logo"
+                    width={54}
+                    height={54}
+                    className="w-42 h-42 object-contain"
+                  />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
                   ForgeSpace Workspace
@@ -254,31 +266,6 @@ export default function LandingPage() {
               </div>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      <section className="py-12 bg-background/50 border-y">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-sm text-muted-foreground mb-8">
-            Trusted by innovative teams at
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-center">
-            {[
-              'TechFlow',
-              'InnovateLab',
-              'Creative Studio',
-              'NextGen',
-              'Visionary',
-              'FutureWorks',
-            ].map((company) => (
-              <div
-                key={company}
-                className="flex items-center justify-center text-muted-foreground font-medium"
-              >
-                {company}
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -322,7 +309,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+      <section className="py-20 bg-gradient-to-r from-purple-400 to-blue-500 text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 md:grid-cols-3">
             {stats.map((stat, index) => (
@@ -516,8 +503,13 @@ export default function LandingPage() {
           <div className="grid gap-8 md:grid-cols-4">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center">
-                  <Sparkles className="h-4 w-4 text-white" />
+                <div className="h-8 w-8 rounded-lg flex items-center justify-center">
+                  <Image
+                    src="/forgespace-logo.png"
+                    alt="ForgeSpace Logo"
+                    width={32}
+                    height={32}
+                  />
                 </div>
                 <span className="font-semibold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                   ForgeSpace

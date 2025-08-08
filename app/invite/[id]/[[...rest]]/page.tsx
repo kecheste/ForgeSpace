@@ -26,6 +26,7 @@ import {
   Users,
   XCircle,
 } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -262,8 +263,13 @@ export default function InvitationPage() {
       <Card className="w-full max-w-md mx-4">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="h-16 w-16 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
-              <Building2 className="h-8 w-8 text-white" />
+            <div className="h-16 w-16 rounded-full bg-gradient-to-br from-pink-100 to-blue-200 flex items-center justify-center">
+              <Image
+                src="/forgespace-logo.png"
+                alt="ForgeSpace Logo"
+                width={36}
+                height={36}
+              />
             </div>
           </div>
           <CardTitle className="text-2xl">Workspace Invitation</CardTitle>

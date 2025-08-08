@@ -1,11 +1,9 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { useSidebar } from '@/components/providers/sidebar-provider';
+import { useUserProfile } from '@/components/providers/user-profile-provider';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,22 +12,25 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useUser, useClerk } from '@clerk/nextjs';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { cn } from '@/lib/utils';
+import { useClerk, useUser } from '@clerk/nextjs';
 import {
+  Hammer,
   LayoutGrid,
-  Sparkles,
-  Users2,
-  LineChart,
-  Settings2,
   LifeBuoy,
+  LineChart,
   LogOut,
-  User,
   PanelLeftClose,
   PanelLeftOpen,
-  Hammer,
+  Settings2,
+  Sparkles,
+  User,
+  Users2,
 } from 'lucide-react';
-import { useSidebar } from '@/components/providers/sidebar-provider';
-import { useUserProfile } from '@/components/providers/user-profile-provider';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const navigation = [
   {
@@ -111,8 +112,13 @@ export function AppSidebar() {
           href="/dashboard"
           className="flex items-center space-x-2 hover:opacity-80 transition-opacity w-full"
         >
-          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
-            <Sparkles className="h-4 w-4 text-primary-foreground" />
+          <div className="h-8 w-8 rounded-lg flex items-center justify-center flex-shrink-0">
+            <Image
+              src="/forgespace-logo.png"
+              alt="ForgeSpace Logo"
+              width={32}
+              height={32}
+            />
           </div>
           {!collapsed && (
             <span className="font-semibold text-lg tracking-tight">
