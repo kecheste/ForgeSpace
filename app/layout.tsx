@@ -4,11 +4,6 @@ import { ClerkProvider } from '@clerk/nextjs';
 import type { Viewport } from 'next';
 import { Manrope, Playfair_Display } from 'next/font/google';
 import '../styles/globals.css';
-import {
-  structuredData as appStructuredData,
-  organizationStructuredData,
-  websiteStructuredData,
-} from './structured-data';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -38,12 +33,6 @@ export const viewport: Viewport = {
   colorScheme: 'light dark',
 };
 
-const combinedStructuredData = [
-  appStructuredData,
-  organizationStructuredData,
-  websiteStructuredData,
-];
-
 /**
  * Root layout component that wraps all pages
  *
@@ -67,14 +56,6 @@ export default function RootLayout({
           name="google-site-verification"
           content="CD8o5e2tN1I--zxj6lqHoKCqnQIu0nWfRxGxg0xgHWk"
         />
-        <head>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(combinedStructuredData),
-            }}
-          />
-        </head>
         <body
           className={`
           font-body 
